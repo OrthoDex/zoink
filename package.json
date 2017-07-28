@@ -1,0 +1,18 @@
+{
+  "name": "zoink",
+  "version": "0.0.1",
+  "description": "A fast image resizing and format conversion framework to be used in serverless environments",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "serverless",
+    "image",
+    "sharp",
+    "libvips",
+    "webp"
+  ],
+  "author": "neeharv",
+  "license": "MIT"
+}
