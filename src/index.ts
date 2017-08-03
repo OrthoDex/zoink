@@ -1,36 +1,29 @@
 import { IncomingMessage, ServerResponse } from "http";
 import * as pathToRegexp from "path-to-regexp";
 import * as validUrl from "valid-url";
+import { ImageOpts } from "./types";
+import { doIt } from "./imageOps";
 
-/* types */
-type ImageOpts = {
-  q: number;
-  f: string;
-  w?: number;
-  h?: number;
-  [key: string]: string | number | undefined;
-};
-type ImageOptionNames = "q" | "f";
-type ImageOptionKeys = Array<ImageOptionNames>;
-
-/* regexes */
 // https://regex101.com/r/NJd1Pc/1
 const VALID_IMAGE_OPTION_PATH = /^(?:[a-z0-9]+_[a-z0-9]+,?)+/;
-const ImageOptionsKeys: ImageOptionKeys = ["q", "f"];
+const PATH_OPTS_REGEX = "/:imageOpts/:imagePath";
 const defaultImageOpts: ImageOpts = {
   q: 60,
   f: "auto"
 };
-const PATH_OPTS_REGEX = "/:imageOpts/:imagePath";
 const re = pathToRegexp(PATH_OPTS_REGEX);
+const imageOptions = [
+  "q", //quality
+  "f", //format
+  "w", //width
+  "h" //height
+];
 
 const getImageOptsFromPath = (imageOptsPath: string): ImageOpts => {
   const opts = imageOptsPath.split(",");
   return opts.reduce((acc, opt) => {
     const [imageKey, imageValue, ...remaining] = opt.split("_");
-    const isSupportedOption = ImageOptionsKeys.includes(
-      <ImageOptionNames>imageKey
-    );
+    const isSupportedOption = imageOptions.includes(imageKey);
     const isValidOptionValue = imageValue || false;
     if (isSupportedOption && isValidOptionValue) acc[imageKey] = imageValue;
     return acc;
@@ -66,8 +59,7 @@ const requestHandler = (req: IncomingMessage, res: ServerResponse) => {
     const { fetchImageUrl, imageOptionsPath } = extractOptsFromPath(safeUrl);
     const imageOpts = getImageOptsFromPath(imageOptionsPath);
     res.writeHead(200);
-    res.write(JSON.stringify({ fetchImageUrl, imageOpts }));
-    res.end();
+    doIt(fetchImageUrl).pipe(res);
   } catch (error) {
     console.error(error);
     res.writeHead(400);
