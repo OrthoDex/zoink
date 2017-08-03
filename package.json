@@ -21,6 +21,7 @@
     "@types/micro": "^7.3.0",
     "@types/node": "^6.0.85",
     "@types/path-to-regexp": "^1.7.0",
+    "@types/request": "^2.0.0",
     "@types/sharp": "^0.17.2",
     "@types/valid-url": "^1.0.2",
     "micro-dev": "^1.0.2",
@@ -30,6 +31,7 @@
   "dependencies": {
     "micro": "^8.0.1",
     "path-to-regexp": "^1.7.0",
+    "request": "^2.81.0",
     "sharp": "^0.18.2",
     "valid-url": "^1.0.9"
   }
