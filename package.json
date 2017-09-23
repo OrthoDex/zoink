@@ -1,22 +1,16 @@
 {
   "name": "zoink",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A fast image resizing and format conversion framework to be used in serverless environments",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "test",
     "start": "micro ./dist/index.js",
     "dev": "micro-dev ./dist/index.js"
   },
-  "keywords": [
-    "serverless",
-    "image",
-    "sharp",
-    "libvips",
-    "webp"
-  ],
+  "keywords": ["serverless", "image", "sharp", "libvips", "webp"],
   "author": "neeharv",
-  "license": "MIT",
+  "license": "Apache License 2.0",
   "devDependencies": {
     "@types/micro": "^7.3.0",
     "@types/node": "^6.0.85",
