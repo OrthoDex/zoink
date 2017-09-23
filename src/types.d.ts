@@ -1,12 +1,10 @@
 /// <reference types="node" />
 import { IncomingMessage, ServerResponse } from "http";
-export declare type ImageOpts = {
-  q: number;
-  f: string;
-  w?: number;
-  h?: number;
-  [key: string]: string | number | undefined;
-};
+export declare type ImageOptionNames = "q" | "f" | "w" | "h";
+export declare type ImageOptionValues = string | number;
+export declare type ImageOptionPairs = Array<
+  [ImageOptionNames, ImageOptionValues]
+>;
 declare const requestHandler: (
   req: IncomingMessage,
   res: ServerResponse
